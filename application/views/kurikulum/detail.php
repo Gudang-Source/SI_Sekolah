@@ -12,6 +12,7 @@
                         <td>Kelas</td>
                         <td>
                             <select id="kelas" class="form-control" onChange="load_data()">
+                            <option value="semua_kelas">Semua Kelas</option>
                             <?php
                             for ($i=1; $i<=$info['jumlah_kelas'] ; $i++) { 
                                 echo "<option value='$i'>Kelas $i</option>";
@@ -23,7 +24,7 @@
                 </table>
             </div>
             <div class="d-block text-center card-footer">
-                <?php echo anchor('kurikulum/addDetail','<i class="fas fa-user-plus"></i>','class="btn btn-outline-primary"'); ?>
+                <?php echo anchor('kurikulum/addDetail/'.$this->uri->segment(3),'<i class="fas fa-user-plus"></i>','class="btn btn-outline-primary"'); ?>
                 <?php echo anchor('kurikulum','<i class="fas fa-undo"></i>','class="btn btn-outline-danger"'); ?>
             </div>
         </div>
@@ -54,7 +55,7 @@
         $.ajax({
             type:'GET',
             url:'<?php echo base_url() ?>index.php/kurikulum/kurikulumDetail',
-            data:'jurusan='+jurusan+'&kelas='+kelas,
+            data:'jurusan='+jurusan+'&kelas='+kelas+'&id_kurikulum=<?php echo $this->uri->segment(3); ?>',
             success:function(html) {
                 $("#table").html(html);
             }

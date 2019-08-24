@@ -21,7 +21,7 @@
     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-<link href="https://demo.dashboardpack.com/architectui-html-free/main.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>source/main.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <body>
@@ -234,7 +234,7 @@
             <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
         </div>
     </div>
-    <script type="text/javascript" src="https://demo.dashboardpack.com/architectui-html-free/assets/scripts/main.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>source/assets/scripts/main.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 </body>
 </html>

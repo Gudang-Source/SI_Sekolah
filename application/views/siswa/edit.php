@@ -18,7 +18,7 @@
                     <div class="col-md-6">
                         <div class="position-relative form-group">
                             <label class="">Agama</label>
-                            <?php echo combo_dinamis('agama','tbl_agama','nama_agama','kd_agama',$siswa['kd_agama']); ?>
+                            <?php echo combo_dinamis('agama','tbl_agama','nama_agama','kd_agama',$siswa['kd_agama'],null); ?>
                         </div>
                     </div>
                 </div>

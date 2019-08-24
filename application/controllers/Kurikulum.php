@@ -97,8 +97,14 @@ class Kurikulum extends CI_Controller
 
 	function kurikulumDetail()
 	{
-		$kelas = $_GET['kelas'];
-		$jurusan = $_GET['jurusan'];
+		$kelas 			= $_GET['kelas'];
+		$jurusan 		= $_GET['jurusan'];
+		$id_kurikulum 	= $_GET['id_kurikulum'];
+		if ($kelas == 'semua_kelas') {
+			$selected_kelas = '';
+			} else {
+				$selected_kelas= "AND kd.kelas='$kelas'";
+			}
 
 		echo "<table class=' align-middle mb-0 table table-borderless table-striped table-hover'>
 		<thead>
@@ -107,19 +113,42 @@ class Kurikulum extends CI_Controller
 				<th class='text-center'>Kode Pelajaran</th>
 				<th class='text-center'>Nama Mata Pelajaran</th>
 				<th class='text-center'>Kelas</th>
-				<th class='text-center'></th>
+				<th class='text-center'>Action</th>
 			</tr>
 		</thead>";
 
 		$sql = 
-		"SELECT tm.kd_mapel, tm.nama_mapel, kd.kelas FROM tbl_kurikulum_detail as kd, tbl_kurikulum as tk, tbl_mapel as tm,tbl_jurusan as tj WHERE kd.id_kurikulum=tk.id_kurikulum AND kd.kd_mapel=tm.kd_mapel AND kd.kd_jurusan=tj.kd_jurusan AND kd.kelas='$kelas' AND kd.kd_jurusan='$jurusan'";
+		"SELECT kd.id_kurikulum_detail, tm.kd_mapel, tm.nama_mapel, kd.kelas, kd.id_kurikulum FROM tbl_kurikulum_detail as kd, tbl_kurikulum as tk, tbl_mapel as tm,tbl_jurusan as tj WHERE kd.id_kurikulum=tk.id_kurikulum AND kd.kd_mapel=tm.kd_mapel AND kd.kd_jurusan=tj.kd_jurusan $selected_kelas  AND kd.id_kurikulum= '$id_kurikulum' AND kd.kd_jurusan='$jurusan'";
 		$kurikulum = $this->db->query($sql)->result();
 		$no = 1;
 		foreach ($kurikulum as $row){
-			echo "<tr><td class='text-center'>$no</td><td>$row->kd_mapel</td><td>$row->nama_mapel</td><td class='text-center'>$row->kelas</td><td></td></tr>";
+			echo "<tr><td class='text-center'>$no</td><td>$row->kd_mapel</td><td>$row->nama_mapel</td><td class='text-center'>$row->kelas</td><td class='text-center'>".anchor('kurikulum/deleteDetail/'.$row->id_kurikulum_detail.'/'.$row->id_kurikulum,'<i class="fa fa-trash"></i>')."</td></tr>";
 			$no++;
 		}
 		echo "</table>";
+	}
+
+	function addDetail()
+	{
+		if (isset($_POST['submit'])) {
+			$this->Model_kurikulum->addKurikulumDetail();
+			redirect('kurikulum');
+		} else {
+			$jumlah_kelas = "SELECT jumlah_kelas FROM tbl_jenjang_sekolah as js, tbl_sekolah_info as si WHERE js.id_jenjang= si.	id_jenjang_sekolah";
+			$data['info']= $this->db->query($jumlah_kelas)->row_array();
+			$this->template->load('template','kurikulum/addDetail',$data);
+		}
+	}
+
+	function deleteDetail()
+	{
+		$id_kurikulum 			= $this->uri->segment(4);
+		$id_kurikulum_detail	= $this->uri->segment(3);
+		if (!empty($id_kurikulum_detail)) {
+			$this->db->where('id_kurikulum_detail',$id_kurikulum_detail);
+			$this->db->delete('tbl_kurikulum_detail');
+			redirect ('kurikulum/detail',$id_kurikulum);
+		}
 	}
 
 }
