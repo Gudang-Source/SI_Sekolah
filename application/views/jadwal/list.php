@@ -78,12 +78,64 @@
     var kelas=$('#kelas').val();
     var jurusan=$('#jurusan').val();
 
-    $.ajax({
+    $ .ajax({
       type:'GET',
       url:'<?php echo base_url() ?>index.php/jadwal/data_jadwal',
       data:'jurusan='+jurusan+'&kelas='+kelas+'&id_kurikulum=<?php echo $this->uri->segment(3); ?>',
       success:function(html) {
         $("#table").html(html);
+      }
+
+    })
+  }
+
+  function updateGuru(id) {
+    var guru=$("#guru"+id).val();
+    $ .ajax({
+      type:'GET',
+      url:'<?php echo base_url() ?>index.php/jadwal/update_guru',
+      data:'id_guru='+guru+'&id_jadwal='+id,
+      success:function(html) {
+        load_data();
+      }
+
+    })
+  }
+
+  function updateRuang(id) {
+    var ruang=$("#ruang"+id).val();
+    $ .ajax({
+      type:'GET',
+      url:'<?php echo base_url() ?>index.php/jadwal/update_ruang',
+      data:'kd_ruangan='+ruang+'&id_jadwal='+id,
+      success:function(html) {
+        load_data();
+      }
+
+    })
+  }
+
+  function updateHari(id) {
+    var hari=$("#hari"+id).val();
+    $ .ajax({
+      type:'GET',
+      url:'<?php echo base_url() ?>index.php/jadwal/update_hari',
+      data:'hari='+hari+'&id_jadwal='+id,
+      success:function(html) {
+        load_data();
+      }
+
+    })
+  }
+
+  function updateJam(id) {
+    var jam=$("#jam"+id).val();
+    $ .ajax({
+      type:'GET',
+      url:'<?php echo base_url() ?>index.php/jadwal/update_jam',
+      data:'jam='+jam+'&id_jadwal='+id,
+      success:function(html) {
+        load_data();
       }
 
     })

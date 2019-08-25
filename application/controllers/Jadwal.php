@@ -52,7 +52,7 @@ class Jadwal extends CI_Controller
 		</thead>";
 
 		$sql = 
-		"SELECT tj.hari, tj.id_jadwal, tm.nama_mapel, tg.nama_guru, tj.hari, tr.nama_ruang, tj.jam_mulai, tj.jam_selesai 
+		"SELECT tj.hari, tj.id_jadwal, tm.nama_mapel, tg.id_guru, tg.nama_guru, tj.hari, tr.nama_ruang, tr.kd_ruang, tj.jam, tj.kd_ruangan
 		FROM tbl_jadwal AS tj, tbl_guru as tg, tbl_ruangan AS tr, tbl_mapel AS tm
 		WHERE tj.kd_mapel=tm.kd_mapel AND tj.id_guru=tg.id_guru AND tj.kd_ruangan=tr.kd_ruang AND tj.kelas='$kelas' AND tj.kd_jurusan = '$jurusan'";
 		$jadwal 		= $this->db->query($sql)->result();
@@ -67,7 +67,16 @@ class Jadwal extends CI_Controller
 			'Minggu'	=> 'Minggu');
 		$jam_pelajaran 	= $this->model_jadwal->getJamPelajaran();
 		foreach ($jadwal as $row){
-			echo "<tr><td class='text-center'>$no</td><td>$row->nama_mapel</td><td>". combo_dinamis('guru', 'tbl_guru', 'nama_guru', 'id_guru', null, "class='form-control'")."</td><td class='text-center'>". combo_dinamis('ruangan', 'tbl_ruangan', 'nama_ruang', 'kd_ruang', null, "class='form-control'")."</td><td>". form_dropdown('hari',$hari,null,"class='form-control'") ."</td><th>". form_dropdown('jam',$jam_pelajaran,null,"class='form-control'") ."</th><td class='text-center'>".anchor('jadwal/deleteJadwal/'.$row->id_jadwal,'<i class="fa fa-trash"></i>')."</td></tr>";
+			echo "
+			<tr>
+				<td class='text-center'>$no</td>
+				<td>$row->nama_mapel</td>
+				<td>". combo_dinamis('guru', 'tbl_guru', 'nama_guru', 'id_guru',$row->id_guru,"id='guru".$row->id_jadwal."'onChange='updateGuru(".$row->id_jadwal.")'")."</td>
+				<td class='text-center'>". combo_dinamis('ruangan', 'tbl_ruangan', 'nama_ruang', 'kd_ruang',$row->kd_ruangan,"id='ruang".$row->id_jadwal."'onChange='updateRuang(".$row->id_jadwal.")'")."</td>
+				<td>". form_dropdown('hari',$hari,$row->hari,"class='form-control' id='hari".$row->id_jadwal."'onChange='updateHari(".$row->id_jadwal.")'") ."</td>
+				<th>". form_dropdown('jam',$jam_pelajaran,$row->jam,"class='form-control' id='jam".$row->id_jadwal."'onChange='updateJam(".$row->id_jadwal.")'") ."</th>
+				<td class='text-center'>".anchor('jadwal/deleteJadwal/'.$row->id_jadwal,'<i class="fa fa-trash"></i>')."</td>
+			</tr>";
 			$no++;
 		}
 		echo "</table>";
@@ -75,4 +84,31 @@ class Jadwal extends CI_Controller
 		
 	}
 
+	function update_guru()
+	{
+		$id_guru 	= $_GET['id_guru'];
+		$id_jadwal	= $_GET['id_jadwal'];
+		$this->db->where('id_jadwal',$id_jadwal);
+		$this->db->update('tbl_jadwal',array('id_guru'=>$id_guru)); }
+
+	function update_ruang()
+	{
+		$kd_ruang 	= $_GET['kd_ruangan'];
+		$id_jadwal	= $_GET['id_jadwal'];
+		$this->db->where('id_jadwal',$id_jadwal);
+		$this->db->update('tbl_jadwal',array('kd_ruangan'=>$kd_ruang)); }
+
+	function update_hari()
+	{
+		$hari 		= $_GET['hari'];
+		$id_jadwal	= $_GET['id_jadwal'];
+		$this->db->where('id_jadwal',$id_jadwal);
+		$this->db->update('tbl_jadwal',array('hari'=>$hari)); }
+
+	function update_jam()
+	{
+		$jam 		= $_GET['jam'];
+		$id_jadwal	= $_GET['id_jadwal'];
+		$this->db->where('id_jadwal',$id_jadwal);
+		$this->db->update('tbl_jadwal',array('jam'=>$jam)); }
 }

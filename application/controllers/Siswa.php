@@ -18,7 +18,7 @@ class Siswa extends CI_Controller {
             array('db' => 'foto', 
                 'dt'   => 'foto',
                 'formatter' => function( $d) {
-                    return "<img class='rounded-circle' src='https://demo.dashboardpack.com/architectui-html-free/assets/images/avatars/1.jpg'></img>";}),
+                    return "<img width='50px' class='rounded-circle' src='". base_url()."/uploads/".$d."'>";}),
             array('db' => 'nim', 'dt' => 'nim'),
             array('db' => 'nama', 'dt' => 'nama'),
             array('db' => 'tempat_lahir', 'dt' => 'tempat_lahir'),
@@ -52,7 +52,10 @@ class Siswa extends CI_Controller {
 
     function add() {
         if (isset($_POST['submit'])) {
-            $this->Model_siswa->add();
+
+            $upload_foto = $this->upload_foto_siswa();
+
+            $this->Model_siswa->add($upload_foto);
             redirect('siswa');
         } else {
             $this->template->load('template','siswa/add');
@@ -61,7 +64,8 @@ class Siswa extends CI_Controller {
 
     function edit() {
         if (isset($_POST['submit'])) {
-            $this->Model_siswa->edit();
+            $upload_foto = $this->upload_foto_siswa();
+            $this->Model_siswa->edit($upload_foto);
             redirect('siswa');
         } else {
             $nim            = $this->uri->segment(3);
@@ -78,5 +82,18 @@ class Siswa extends CI_Controller {
             $this->db->delete('tbl_siswa');
             redirect('siswa');
         }
+    }
+
+    function upload_foto_siswa() {
+        $config['upload_path']          = './uploads/';
+        $config['allowed_types']        = 'jpg|png';
+        $config['max_size']             = 2048;
+        $this->load->library('upload', $config);
+
+            //proses upload
+
+        $this->upload->do_upload('userfile');
+        $upload = $this->upload->data();
+        return $upload['file_name'];
     }
 }
