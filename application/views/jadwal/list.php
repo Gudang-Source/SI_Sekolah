@@ -20,6 +20,10 @@
               </select>
             </td>
           </tr>
+          <tr><td>Kelompok</td>
+          <td>
+            <div id="list_kelompok_belajar"></div>
+          </td></tr>
         </table>
       </div>
       <div class="d-block text-center card-footer">
@@ -75,8 +79,8 @@
 </script>
 <script type="text/javascript">
   function load_data() {
-    var kelas=$('#kelas').val();
-    var jurusan=$('#jurusan').val();
+    var kelas   =$('#kelas').val();
+    var jurusan =$('#jurusan').val();
 
     $ .ajax({
       type:'GET',
@@ -84,6 +88,21 @@
       data:'jurusan='+jurusan+'&kelas='+kelas+'&id_kurikulum=<?php echo $this->uri->segment(3); ?>',
       success:function(html) {
         $("#table").html(html);
+        listKelompok();
+      }
+
+    })
+  }
+
+  function listKelompok() {
+    var kelas    = $('#kelas').val();
+    var jurusan  = $('#jurusan').val();
+    $ .ajax({
+      type:'GET',
+      url:'<?php echo base_url() ?>index.php/jadwal/kelompok',
+      data:'jurusan='+jurusan+'&kelas='+kelas,
+      success:function(html) {
+        $("#list_kelompok_belajar").html(html);
       }
 
     })

@@ -111,4 +111,16 @@ class Jadwal extends CI_Controller
 		$id_jadwal	= $_GET['id_jadwal'];
 		$this->db->where('id_jadwal',$id_jadwal);
 		$this->db->update('tbl_jadwal',array('jam'=>$jam)); }
+
+	function kelompok()
+	{
+		echo "<select id='list_kelompok' class='form-control'>";
+		$this->db->where('kelas', $_GET['kelas']);
+		$this->db->where('kd_jurusan', $_GET['jurusan']);
+		$kelompok 	= $this->db->get('tbl_kelompok');
+		foreach ($kelompok->result() as $row) {
+			echo "<option value='$row->id_ke;omppk'>$row->nama_kelompok</option>";
+		}
+		echo "</select>";
+	}
 }

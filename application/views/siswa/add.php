@@ -4,7 +4,7 @@
             <div class="card-body"><h5 class="card-title">Input Data Siswa</h5>
                 <?php echo form_open_multipart('siswa/add','role="form"'); ?>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="position-relative form-group">
                             <label class="">Nomor Induk Murid</label>
                             <input name="nim" placeholder="Masukan Nomor Induk Murid" type="text" class="form-control">
@@ -14,6 +14,12 @@
                         <div class="position-relative form-group">
                             <label class="">Nama Lengkap</label>
                             <input name="nama" placeholder="Masukan Nama Lengkap" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="position-relative form-group">
+                            <label>Kelompok Belajar</label>
+                            <?php echo combo_dinamis('kelompok','tbl_kelompok','nama_kelompok','id_kelompok','id_kelompok',null); ?>
                         </div>
                     </div>
                 </div>

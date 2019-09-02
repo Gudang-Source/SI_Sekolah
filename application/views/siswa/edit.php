@@ -6,20 +6,29 @@
                 echo form_hidden('nim',$siswa['nim']);
                 ?>
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="position-relative form-group"><label class="">Nomor Induk Murid</label>
+                    <div class="col-md-3">
+                        <div class="position-relative form-group">
+                            <label class="">Nomor Induk Murid</label>
                             <input readonly=""  value="<?php echo $siswa['nim']?>" placeholder="Masukan Nomor Induk Murid" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="position-relative form-group"><label class="">Nama Lengkap</label>
+                        <div class="position-relative form-group">
+                            <label class="">Nama Lengkap</label>
                             <input name="nama" value="<?php echo $siswa['nama']?>" placeholder="Masukan Nama Lengkap" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="position-relative form-group">
+                            <label>Kelompok Belajar</label>
+                            <?php echo combo_dinamis('kelompok','tbl_kelompok','nama_kelompok','id_kelompok',$siswa['id_kelompok'],null); ?>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <div class="position-relative form-group"><label class="">Jenis Kelamin</label>
+                        <div class="position-relative form-group">
+                            <label class="">Jenis Kelamin</label>
                             <?php echo form_dropdown('gender', array('W'=>'Perempuan','P'=>'Laki-Laki'),$siswa['gender'],"class='form-control'"); ?>
                         </div>
                     </div>

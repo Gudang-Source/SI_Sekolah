@@ -14,6 +14,7 @@ class Model_siswa extends CI_Model
 			'kd_agama'		=> $this->input->post('agama',TRUE),
 			'tempat_lahir'	=> $this->input->post('tempat_lahir',TRUE),
 			'tanggal_lahir'	=> $this->input->post('tanggal_lahir',TRUE),
+			'id_kelompok'	=> $this->input->post('kelompok',TRUE),
 			'foto'			=> $foto
 			);
 		$this->db->insert($this->table,$data);
@@ -27,6 +28,7 @@ class Model_siswa extends CI_Model
 			'gender'		=> $this->input->post('gender',TRUE),
 			'kd_agama'		=> $this->input->post('agama',TRUE),
 			'tempat_lahir'	=> $this->input->post('tempat_lahir',TRUE),
+			'id_kelompok'	=> $this->input->post('kelompok',TRUE),
 			'tanggal_lahir'	=> $this->input->post('tanggal_lahir',TRUE)
 			);
 		} else {
@@ -36,13 +38,14 @@ class Model_siswa extends CI_Model
 			'gender'		=> $this->input->post('gender',TRUE),
 			'kd_agama'		=> $this->input->post('agama',TRUE),
 			'tempat_lahir'	=> $this->input->post('tempat_lahir',TRUE),
+			'id_kelompok'	=> $this->input->post('kelompok',TRUE),
 			'tanggal_lahir'	=> $this->input->post('tanggal_lahir',TRUE),
 			'foto'			=> $foto
 			);
+		}
 		$nim = $this->input->post('nim');
 		$this->db->where('nim',$nim);
 		$this->db->update($this->table,$data);	
-		}
-		
+			
 	}
 }
