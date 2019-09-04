@@ -28,4 +28,5 @@ class Model_kelompok extends CI_Model
 		$this->db->where('id_kelompok',$nim);
 		$this->db->update($this->table,$data);
 	}
+
 }

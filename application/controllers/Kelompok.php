@@ -88,4 +88,17 @@ class Kelompok extends CI_Controller
         }
     }
 
+    function list_kelompok_jurusan()
+    {
+    	$jurusan = $_GET['jurusan'];
+    	echo "<select name='' id='kelompokII' class='form-control'>";
+    	$this->db->where('kd_jurusan',$jurusan);
+    	$kelompok = $this->db->get('tbl_kelompok');
+    	foreach ($kelompok->result() as $row) {
+    			echo "<option value='$row->id_kelompok'>$row->nama_kelompok</option>";
+    	}
+
+    	echo "</select>";
+    }
+
 }

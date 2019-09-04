@@ -96,4 +96,20 @@ class Siswa extends CI_Controller {
         $upload = $this->upload->data();
         return $upload['file_name'];
     }
+
+    function siswa_didik() {
+     $this->template->load('template','siswa/peserta_didik');   
+    }
+
+    function list_siswa_jurusan() {
+        $list = $_GET['kelompok'];
+        echo "<table class='align-middle table table-striped table-hover' onChange='load_list_siswa()'>
+        <tr class='text-center'><th>NIM</th><th>Nama</th></tr>";
+        $this->db->where('id_kelompok',$list);
+        $siswa = $this->db->get('tbl_siswa');
+        foreach ($siswa->result() as $row) {
+            echo "<tr><td class='text-center'>$row->nim</td><td>$row->nama</td></tr>";
+        }
+        echo "</table>";
+    }
 }
