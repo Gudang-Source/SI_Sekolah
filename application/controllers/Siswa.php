@@ -112,4 +112,24 @@ class Siswa extends CI_Controller {
         }
         echo "</table>";
     }
+
+    function export_data_excel() {
+        $this->load->library('OPHP_Excel');
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'NIM');
+        $objPHPExcel->getActiveSheet()->setCellValue('B1', 'Nama Siswa');
+        $kelompok = $_POST['kelompok'];
+        $this->db->where('id_kelompok',$kelompok); 
+
+        $siswa = $this->db->get('tbl_siswa');
+        $no = 2;
+        foreach ($siswa->result() as $row) {
+            $objPHPExcel->getActiveSheet()->setCellValue('A'.$no, $row->nim);
+            $objPHPExcel->getActiveSheet()->setCellValue('B'.$no, $row->nama);
+            $no++;
+        }
+        
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007'); 
+        $objWriter->save("datamahasiswa.xlsx");
+    }
 }

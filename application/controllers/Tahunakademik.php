@@ -59,7 +59,13 @@ class Tahunakademik extends CI_Controller
 	{
 		if (isset($_POST['submit'])) {
 			$this->Model_tahunakademik->add();
+			$idTahunAkademik = $this->db->insert_id();
+			//insert to tabel walikelas
+			$this->load->model('Model_walikelas');
+			$this->Model_walikelas->set_wali($idTahunAkademik);
+
 			redirect('tahunakademik');
+
 		} else {
 			$this->template->load('template','tahunakademik/add');
 		}

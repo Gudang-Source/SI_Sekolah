@@ -12,3 +12,10 @@ function combo_dinamis($name, $table, $field, $pk, $select, $extra) {
 	$combo .= "</select>";
 	return $combo;	
 }
+
+function tahun_akademik_aktif ($field) {
+	$g = & get_instance();
+	$g->db->where('is_aktif','y');
+	$tahun_akademik_aktif = $g->db->get('tbl_tahun_akademik')->row_array();
+	return $tahun_akademik_aktif[$field];
+}

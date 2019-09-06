@@ -3,6 +3,7 @@
         <div class="main-card mb-3 card">
             <div class="card-header">FILTER DATA SISWA</div>
             <div class="table-responsive">
+            <?php echo form_open('siswa/export_data_excel'); ?>
                 <table id="table_didik" class=" align-middle mb-0 table table-borderless table-striped table-hover">
                     <tr>
                     <td><?php echo combo_dinamis('jurusan','tbl_jurusan','nama_jurusan','kd_jurusan',null,"id='jurusan' onChange='load_kelompok()'") ?></td>
@@ -10,7 +11,9 @@
                     <tr>
                     <td><div id="kelompok" onChange='load_list_siswa()'></div></td>
                     </tr>
+                    <tr><td><button class="btn btn-outline-success btn-lg" type="submit">Export Excel</button></td></tr>
                 </table>
+                </form>
             </div>
         </div>
     </div>
