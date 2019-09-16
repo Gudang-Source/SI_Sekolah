@@ -10,6 +10,8 @@ class Users extends CI_Controller
 		parent:: __construct();
 		$this->load->library('ssp');
 		$this->load->model('Model_user');
+
+        chekAksesModule();
 	}
 
 	function data() {
@@ -107,6 +109,7 @@ class Users extends CI_Controller
     }
 
     function modul() {
+        $level = $_GET['level_user'];
     	echo "<table class='align-middle mb-0 table table-borderless table-striped table-hover'>
                     <thead>
                         <tr>
@@ -118,11 +121,38 @@ class Users extends CI_Controller
                         $no     =1;
                         $menu   = $this->db->get('tabel_menu');
                         foreach ($menu->result() as $row) {
-                            echo "<tr><td align='center'>$no .</td><td>$row->nama_menu</td><td>$row->link</td><td align='center'><input type='checkbox' name='check'></input></td></tr>";
+                            echo "<tr><td align='center'>$no .</td><td>$row->nama_menu</td><td>$row->link</td><td align='center'><input type='checkbox'";
+                            $this->checklist_menu($level, $row->id);
+                            echo " onClick='check_akses($row->id)' name='check'></input></td></tr>";
                             $no++;    
                         }
                         
             echo "</thead>
             </table>";
+    }
+
+    function checklist_menu($level, $menu) {
+        $data   = array('id_level_user'=>$level,'id_menu'=>$menu);
+        $table  = $this->db->get_where('tbl_user_rule',$data);
+        if ($table->num_rows()>0) {
+            echo "checked";
+        }
+    }
+
+    function rule() {
+        $level  = $_GET['level_user'];
+        $menu   = $_GET['id_menu'];
+        $data   = array('id_level_user'=>$level,'id_menu'=>$menu);
+        $table  = $this->db->get_where('tbl_user_rule',$data);
+        if ($table->num_rows()<1) {
+            $this->db->insert('tbl_user_rule',$data);
+            echo "Hak akses ditambahkan";
+        } else {
+            $this->db->where('id_level_user',$level);
+            $this->db->where('id_menu',$menu);
+            $this->db->delete('tbl_user_rule');
+            echo "Hak akses dihapus";
+        }
+
     }
 }

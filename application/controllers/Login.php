@@ -22,7 +22,7 @@ class Login extends CI_Controller
 			$result		= $this->Model_user->check_user($username,$password);
 			if (!empty($result)) {
 				$this->session->set_userdata($result);
-				redirect('siswa');
+				redirect('dashboard');
 			} else {
 				redirect('login');	
 			}

@@ -16,7 +16,7 @@
                 </table>
             </div>
             <div class="d-block text-center card-footer">
-                <?php echo anchor('users/add','<i class="fas fa-user"></i>','class="btn btn-outline-primary"'); ?>
+                <?php echo anchor('users/add','<i class="fas fa-user-plus"></i>','class="btn btn-outline-primary"'); ?>
                 <?php echo anchor('','<i class="fas fa-undo"></i>','class="btn btn-outline-danger"'); ?>
                 <?php echo anchor('users/access','<i class="fas fa-user-cog"></i>','class="btn btn-outline-dark"'); ?>
             </div>

@@ -6,7 +6,7 @@
                 <table id="table_users" class=" align-middle mb-0 table table-borderless table-striped table-hover">
                     <tr>
                         <td>
-                            <div><?php echo combo_dinamis('level','v_user','nama_level','id_level_user',null,"class='form-control'"); ?></div>
+                            <div><?php echo combo_dinamis('level','v_user','nama_level','id_level_user',null,"id='level_user' onChange='load_data()'"); ?></div>
                         </td>
                     </tr>
                 </table>
@@ -32,16 +32,28 @@
 </script>
 <script type="text/javascript">
   function load_data() {
-
+    var level_user = $("#level_user").val();
     $ .ajax({
       type:'GET',
       url:'<?php echo base_url() ?>index.php/Users/modul',
-      //data:'jurusan='+jurusan+'&kelas='+kelas+'&id_kurikulum=<?php echo $this->uri->segment(3); ?>',
+      data:'level_user='+level_user,
       success:function(html) {
         $("#table").html(html);
-        listKelompok();
       }
 
     })
+  }
+
+  function check_akses(id_menu) {
+    var level_user = $("#level_user").val();
+    $ .ajax({
+      type:'GET',
+      url:'<?php echo base_url() ?>index.php/Users/rule',
+      data:'level_user='+level_user+'&id_menu='+id_menu,
+      success:function(html) {
+        alert('Success');        
+      }
+
+    }) 
   }
   </script>

@@ -8,6 +8,8 @@ class Sekolah extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Model_sekolah');
+
+		chekAksesModule();
 	}
 
 	function index()

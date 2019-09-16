@@ -1,8 +1,5 @@
 <?php
-
-/**
-* 
-*/
+ 
 class Wali extends CI_Controller
 {
 	
@@ -10,6 +7,8 @@ class Wali extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('ssp');
+
+		chekAksesModule();
 	}
 
 	function data() {

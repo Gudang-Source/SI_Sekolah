@@ -8,6 +8,8 @@ class Jurusan extends CI_Controller
 		parent::__construct();
 		$this->load->library('ssp');
         $this->load->model('Model_jurusan');
+
+        chekAksesModule();
 	}
 
 	function data() {

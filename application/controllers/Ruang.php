@@ -8,6 +8,8 @@ class Ruang extends CI_Controller
 		parent::__construct();
 		$this->load->library('ssp');
         $this->load->model('Model_ruang');
+
+        chekAksesModule();
 	}
 
 	function data() {
