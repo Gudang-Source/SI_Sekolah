@@ -8,7 +8,6 @@ class Wali extends CI_Controller
 		parent::__construct();
 		$this->load->library('ssp');
 
-		chekAksesModule();
 	}
 
 	function data() {

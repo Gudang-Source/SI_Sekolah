@@ -12,7 +12,6 @@ class Mapel extends CI_Controller
 		$this->load->library('ssp');
         $this->load->model('Model_mapel');
 
-        chekAksesModule();
 	}
 
 	function data() {

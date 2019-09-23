@@ -12,8 +12,7 @@ class Tahunakademik extends CI_Controller
 		$this->load->library('ssp');
         $this->load->model('Model_tahunakademik');
 
-        chekAksesModule();
-	}
+     }
 
 	function data() {
 		// nama tabel

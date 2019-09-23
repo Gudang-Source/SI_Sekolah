@@ -10,7 +10,6 @@ class Siswa extends CI_Controller {
         $this->load->library('ssp');
         $this->load->model('Model_siswa');
 
-        chekAksesModule();
 	}
 
 	function data() {

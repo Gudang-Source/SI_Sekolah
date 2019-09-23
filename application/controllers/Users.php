@@ -11,7 +11,6 @@ class Users extends CI_Controller
 		$this->load->library('ssp');
 		$this->load->model('Model_user');
 
-        chekAksesModule();
 	}
 
 	function data() {

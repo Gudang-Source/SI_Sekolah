@@ -25,6 +25,7 @@ function chekAksesModule() {
     // ambil parameter uri segment untuk controller dan method
     $controller = $ci->uri->segment(1);
     $method = $ci->uri->segment(2);
+    $super_method = $ci->uri->segment(3);
 
     // chek url
     if (empty($method)) {
@@ -41,8 +42,9 @@ function chekAksesModule() {
 
         // chek apakah level ini diberikan hak akses atau tidak
         $chek = $ci->db->get_where('tbl_user_rule', array('id_level_user' => $level_user, 'id_menu' => $menu['id']));
-        if ($chek->num_rows() < 1 and $method != 'data' and $method != 'add' and $method != 'edit' and $method != 'delete' and $method != 'rule' and $method != 'access' and $method != 'modul' and $method != 'list_kelompok_jurusan' and $method != 'list_siswa_jurusan') {
-            redirect('dashboard');
+        if ($chek->num_rows() < 1) {
+            echo "Forboden";
+            die;
         }
     } else {
         redirect('login');

@@ -10,8 +10,6 @@ class Jadwal extends CI_Controller
 	{
 		parent:: __construct();
 		$this->load->model('model_jadwal');
-
-		chekAksesModule();
 	}
 
 	function index() 

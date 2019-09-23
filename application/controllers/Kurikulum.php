@@ -12,7 +12,6 @@ class Kurikulum extends CI_Controller
 		$this->load->library('ssp');
 		$this->load->model('Model_kurikulum');
 
-		chekAksesModule();
 	}
 
 	function data() {
