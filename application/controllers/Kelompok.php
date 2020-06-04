@@ -1,9 +1,7 @@
 <?php 
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
-* 
-*/
-class Kelompok extends CI_Controller
+class Kelompok extends MY_Controller
 {
 	
 	function __construct()

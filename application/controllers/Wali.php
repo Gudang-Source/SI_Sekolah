@@ -1,6 +1,7 @@
 <?php
- 
-class Wali extends CI_Controller
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Wali extends MY_Controller
 {
 	
 	function __construct()
@@ -12,7 +13,7 @@ class Wali extends CI_Controller
 
 	function data() {
 		// nama tabel
-		$table = 'view_walikelas';
+		$table = 'v_walikelas';
         // nama PK
 		$primaryKey = 'id_walikelas';
         // list field

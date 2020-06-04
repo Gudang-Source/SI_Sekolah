@@ -39,7 +39,7 @@
                                     <form method="POST" action="Login/check_login">
                                     <div class="form-row">
                                         <div class="col-md-12">
-                                            <div class="position-relative form-group"><input name="username" id="exampleEmail" placeholder="Masukan Email" type="email" class="form-control"></div>
+                                            <div class="position-relative form-group"><input name="username" placeholder="Masukan Email" type="text" class="form-control"></div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="position-relative form-group"><input name="password" id="examplePassword" placeholder="Masukan Password" type="password" class="form-control"></div>

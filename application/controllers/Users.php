@@ -1,8 +1,7 @@
 <?php 
-/**
-* 
-*/
-class Users extends CI_Controller
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Users extends MY_Controller
 {
 	
 	function __construct()

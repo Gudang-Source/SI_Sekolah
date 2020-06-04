@@ -1,8 +1,6 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
-* 
-*/
 class Login extends CI_Controller
 {
 	function __construct(){
@@ -19,8 +17,8 @@ class Login extends CI_Controller
 
 			$username 	= $this->input->post('username');
 			$password	= $this->input->post('password');
-			$result		= $this->Model_user->check_user($username,$password);
-			if (!empty($result)) {
+			$result		= $this->Model_user->check_user($username);
+			if ($result && $result['password'] == md5($password)) {
 				$this->session->set_userdata($result);
 				redirect('dashboard');
 			} else {

@@ -11,9 +11,8 @@ class Model_user extends CI_Model
 		parent:: __construct();
 	}
 
-	function check_user($username, $password) {
+	function check_user($username) {
 		$username 	= $this->db->where('username',$username);
-		$password 	= $this->db->where('password',md5($password));
 		$user 		= $this->db->get('tbl_user')->row_array();
 		return ($user);
 	}
